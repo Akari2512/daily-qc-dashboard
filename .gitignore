@@ -1,0 +1,18 @@
+# Virtual Environment
+venv/
+__pycache__/
+
+# Environment variables & Secrets
+.env
+
+# Local Database & Snapshots
+*.duckdb
+snapshots/
+
+# Client specific data (chứa thông tin seller thực tế)
+clients/
+clients.json
+
+# OS specific files
+.DS_Store
+Thumbs.db
