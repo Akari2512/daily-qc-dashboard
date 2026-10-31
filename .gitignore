@@ -2,9 +2,12 @@
 venv/
 __pycache__/
 
+# IDE Settings
+.idea/
+
 # Environment variables & Secrets
 .env
-.idea/
+
 
 # Local Database & Snapshots
 *.duckdb
