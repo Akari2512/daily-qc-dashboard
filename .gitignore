@@ -9,8 +9,8 @@ __pycache__/
 *.duckdb
 snapshots/
 
-# Client specific data (chứa thông tin seller thực tế)
-clients/
+# Client specific data
+clients/*
 clients.json
 
 reconcile_csv.py
