@@ -4,6 +4,7 @@ __pycache__/
 
 # Environment variables & Secrets
 .env
+.idea/
 
 # Local Database & Snapshots
 *.duckdb
