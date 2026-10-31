@@ -13,6 +13,8 @@ snapshots/
 clients/
 clients.json
 
+reconcile_csv.py
+
 # OS specific files
 .DS_Store
 Thumbs.db
