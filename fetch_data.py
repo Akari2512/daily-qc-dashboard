@@ -223,16 +223,20 @@ def fetch_all_clients_data():
                     columns=['company_seller_used_id', 'day']),
                 df_traffic_sku[['company_seller_used_id', 'day']] if not df_traffic_sku.empty else pd.DataFrame(
                     columns=['company_seller_used_id', 'day']),
+                df_visitor_sku[['company_seller_used_id', 'day']] if not df_visitor_sku.empty else pd.DataFrame(
+                    columns=['company_seller_used_id', 'day']),
                 df_sales_seller[['company_seller_used_id', 'day']] if not df_sales_seller.empty else pd.DataFrame(
                     columns=['company_seller_used_id', 'day']),
                 df_traffic_seller[['company_seller_used_id', 'day']] if not df_traffic_seller.empty else pd.DataFrame(
+                    columns=['company_seller_used_id', 'day']),
+                df_visitor_seller[['company_seller_used_id', 'day']] if not df_visitor_seller.empty else pd.DataFrame(
                     columns=['company_seller_used_id', 'day'])
             ]
 
             all_keys = pd.concat(key_frames, ignore_index=True).drop_duplicates() if any(
                 not f.empty for f in key_frames) else pd.DataFrame(columns=['company_seller_used_id', 'day'])
 
-            # Lọc active sellers trực tiếp chuẩn xác tại đây
+            # Lọc active sellers trực tiếp chuẩn xác
             if active_sellers and not all_keys.empty:
                 all_keys = all_keys[all_keys['company_seller_used_id'].isin(active_sellers)]
 
@@ -273,10 +277,17 @@ def fetch_all_clients_data():
                                                                  metric_name='Traffic SKU - Page View',
                                                                  collected_val=merged.get('pageview__sku'),
                                                                  raw_val=merged.get('raw_pageview__sku')),
+                merged[['company_seller_used_id', 'day']].assign(source='export_sku_traffic',
+                                                                 metric_name='Traffic SKU - Unique Visitor',
+                                                                 collected_val=merged.get('visitor_sku'), raw_val=None),
                 merged[['company_seller_used_id', 'day']].assign(source='export_seller_traffic',
                                                                  metric_name='Traffic Seller - Page View',
                                                                  collected_val=merged.get('pageview__seller'),
                                                                  raw_val=merged.get('raw_pageview__seller')),
+                merged[['company_seller_used_id', 'day']].assign(source='export_seller_traffic',
+                                                                 metric_name='Traffic Seller - Unique Visitor',
+                                                                 collected_val=merged.get('visitor_seller'),
+                                                                 raw_val=merged.get('raw_visitor_seller')),
             ]
             df_unpivoted = pd.concat(unpivoted_list, ignore_index=True)
 

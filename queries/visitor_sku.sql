@@ -5,9 +5,9 @@ WITH params AS (
         :company_name::text AS company
 )
 SELECT
-    p.company || ' - ' || concat_ws('.', split_part(eest.fk_sku_used_id, '.', 1), split_part(eest.fk_sku_used_id, '.', 2), split_part(eest.fk_sku_used_id, '.', 3)) AS company_seller_used_id,
+    p.company || ' - ' || concat_ws('.', split_part(eest.fk_sku_used_id, '.', 1), split_part(eest.fk_sku_used_id, '.', 2), split_part(eest.fk_sku_used_id, '.', 3)) AS company_seller_used_id, -- Hoặc tùy theo cấu trúc khóa seller/sku của bảng visitor_sku
     eest.day AS day,
-    SUM(eest.unique_visitor) AS sku_visitor
+    SUM(eest.unique_visitor) AS visitor_sku
 FROM ecommerce_export_sku_traffic eest
 CROSS JOIN params p
 WHERE eest.day BETWEEN p.start_date AND p.end_date
